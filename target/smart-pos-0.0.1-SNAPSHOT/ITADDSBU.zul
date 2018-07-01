@@ -1,0 +1,278 @@
+<?page title="Generate Biller" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="static/resources/css/style.css"?>
+<zk>
+    <window id="winITADDSBU"
+            border="none"
+            contentStyle="overflow:auto"
+            closable="false"
+            sizable="false"
+            hflex="1"
+            vflex="1"
+            mode = "embedded"
+            apply="com.camsoft.smartpos.view.BillerUploadView">
+        <!--<zscript src="script/validateText.zs"/>-->
+        <div zclass="subPageTitle">Biller Upload </div>
+        <toolbar id="tbAction" sclass="toolbarAccess">
+            <toolbarbutton id="tbbNew"     image="static/resources/image/icon/new.gif" 		 label="New" 	   visible="false" disabled="true" />
+            <toolbarbutton id="tbbUnlock"  image="static/resources/image/icon/unlock.gif" 	 label="Unlock"    visible="false" disabled="true" />
+            <toolbarbutton id="tbbSave"    image="static/resources/image/icon/save.gif" 	 label="Save" 	   visible="false" disabled="true" />
+            <toolbarbutton id="tbbDelete"  image="static/resources/image/icon/delete.gif"    label="Clear"    visible="false" disabled="true" />
+            <toolbarbutton id="tbbConfirm" image="static/resources/image/icon/confirm.gif"   label="Confirm"   visible="false" disabled="true" />
+            <toolbarbutton id="tbbAuth"    image="static/resources/image/icon/authorize.gif" label="Approve" visible="false" disabled="true" />
+            <toolbarbutton id="tbbView"    image="static/resources/image/icon/query.gif"     label="Search"    visible="false" disabled="true" />
+        </toolbar>
+        <!-- end window theme -->
+        <div zclass="dvWinBox" height="380px">
+            <borderlayout height="100%">
+                <north size="100%" height="320px" border="none"  >
+                    <hbox>
+                        <div>
+                            <hbox spacing="0">
+                                <textbox id="txtCateItemId" value="${arg.P_CATE_ITEM_ID}" maxlength="20" constraint="${ctt}" readonly="true" visible="false" />
+                                <textbox id="txtToolbarHide" constraint="${ctt}" readonly="true" visible="false" width="100px" />
+                            </hbox>
+                            <div height="10px" />
+                            <hbox spacing="30px">
+                                <vbox>
+                                    <hbox>
+                                        <vbox width="100px" align="end"><label value="Agent Name "  sclass="reqF"    /></vbox>
+                                        <combobox id="cboAgentType"  constraint="${ctt}" readonly="true" width="200px"  >
+                                            <comboitem value="1" label="WESTERN Internaltional School" />
+                                            <comboitem value="2" label="ASIA CASH EXPRESS CO LTD" />
+                                            <comboitem value="3" label="eMoney" />
+                                            <comboitem value="3" label="True Money Co Ltd." />
+                                            <comboitem value="3" label="SPEED PAY PLC" />
+                                        </combobox>
+                                    </hbox>
+                                    <div height="10px" />
+                                    <hbox>
+                                        <vbox width="100px" align="end"><label value="Type"  sclass="reqF"    /></vbox>
+                                        <combobox id="cboType"  constraint="${ctt}" readonly="true" width="200px" onCreate="self.setSelectedIndex(0)">
+                                            <comboitem value="1" label="Individual" />
+                                            <comboitem value="2" label="Batch File" />
+                                        </combobox>
+                                    </hbox>
+                                    <div height="10px" />
+                                    <hbox>
+                                        <vbox width="100px" align="end"><label value="Total"  sclass="reqF"    /></vbox>
+                                        <vbox width="100px" align="end">
+                                            <textbox id="txtTotal"></textbox>
+                                        </vbox>
+                                    </hbox>
+                                    <div height="10px" />
+                                    <hbox>
+                                        <tabbox id="tb" height="200px" sclass="toolbar-agent" width="615px" >
+                                            <tabs id="tabs">
+                                                <tab id="tabIndividual" label="Individual" />
+                                                <tab id="tabBatchFile" label="Batch File" visible="false"/>
+                                            </tabs>
+                                            <tabpanels>
+                                                <tabpanel id="tabPanelIndividual">
+                                                    <div height="10px" />
+                                                    <hbox>
+                                                        <vbox width="100px" align="end"><label value="Customer ID"  sclass="reqF"    /></vbox>
+                                                        <textbox id="txtCustomerID"  readonly="false" constraint="${ctt}" width="100px"     />
+                                                        <button id="btnPopulate" sclass="btn-populate" label="P">
+                                                        </button>
+                                                    </hbox>
+                                                    <div height="5px" />
+                                                    <hbox>
+                                                        <vbox width="100px" align="end"><label value="Customer Name"  sclass="ReqF"   /></vbox>
+                                                        <textbox id="txtCustomerName" constraint="${ctt}" width="200px"   />
+                                                    </hbox>
+                                                    <div height="5px" />
+                                                    <hbox>
+                                                        <vbox width="100px" align="end"><label value="Gender"  sclass="ReqF"   /></vbox>
+                                                        <combobox id="cboGender"  constraint="${ctt}" readonly="true" width="100px" >
+                                                            <comboitem value="F" label="F" />
+                                                            <comboitem value="M" label="M" />
+                                                        </combobox>
+                                                    </hbox>
+                                                    <div height="5px" />
+                                                    <hbox>
+                                                        <vbox width="100px" align="end"><label value="Moblie Phone"  sclass="ReqF"   /></vbox>
+                                                        <textbox id="txtMobilePhone" constraint="${ctt}" width="200px"    />
+                                                    </hbox>
+                                                    <div height="5px" />
+                                                    <hbox>
+                                                        <vbox width="100px" align="end"><label value="Currentcy"  sclass="ReqF"    /></vbox>
+                                                        <combobox id="cbocurrentcyType"  constraint="${ctt}" readonly="true" width="200px" onCreate="self.setSelectedIndex(0)" >
+                                                            <comboitem value="KHR" label="KHR" />
+                                                            <comboitem value="USD" label="USD" />
+                                                        </combobox>
+                                                    </hbox>
+                                                </tabpanel>
+                                                <tabpanel id="tabPanelBatch" visible="false">
+                                                    <div height="10px" />
+                                                    <hbox spacing="10">
+                                                        <vbox width="120px" align="end"><label value="File Upload " sclass="reqF" /></vbox>
+                                                        <vbox><textbox id="txtFileUpload" width="300px" /></vbox>
+                                                        <div style="padding-left:5px;">
+                                                            <hbox>
+                                                                <!-- upload="true,maxsize=500" is enable upload for button and set max file size upto 500 Kb -->
+                                                                <button id="btnBrowse"
+                                                                        label="Upload File"
+                                                                        width="70px"
+                                                                        sclass="btnIcon"
+                                                                        upload="true,maxsize=20000"
+                                                                        onUpload="">
+
+                                                                    <attribute name="onUpload">
+                                                                        import intranet.main.sys.FTPProperty;
+
+                                                                        import java.io.File;
+                                                                        import org.zkoss.io.Files;
+                                                                        import org.zkoss.util.media.Media;
+
+                                                                        import java.text.SimpleDateFormat;
+                                                                        import java.text.DateFormat;
+                                                                        import java.util.Date;
+
+                                                                        import java.io.IOException;
+                                                                        import java.io.BufferedWriter;
+                                                                        //import org.apache.commons.io.FileUtils;
+                                                                        import java.io.FileWriter;
+
+                                                                        try {
+                                                                        int inc = 0;
+
+                                                                        boolean isValidFile = false;
+
+                                                                        String fileNameFormat = "";
+                                                                        String fileExtension  = "";
+                                                                        String fileNewName    = "";
+                                                                        String fullFilePathName = "";
+                                                                        String[] fileExtType = new String[] {".xls",".txt"};
+
+                                                                        //String filePath = Executions.getCurrent().getDesktop().getWebApp().getRealPath("/SMART_POS_DOC");
+                                                                         String filePath = "C:/Users/chhaichivon/Desktop/File";
+                                                                        //String filePath = "D:/Program/wamp/www/DE_UPLOAD/BILLER_UPLOAD";
+                                                                        //String filePath = "D:/work/Document/UPLOAD";
+                                                                        Media media = event.getMedia();
+
+
+
+                                                                        /////start current date time//////
+                                                                        DateFormat dtFormat = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+                                                                        Date dt = new Date();
+                                                                        fileNameFormat = dtFormat.format(dt);
+                                                                        /////end current date time//////
+
+                                                                        fileExtension = media.getName();
+                                                                        fileExtension = fileExtension.substring(fileExtension.lastIndexOf("."));
+                                                                        String strComKey = cboAgentType.getSelectedItem().getValue().toString();
+
+                                                                        fileNewName   = strComKey;
+                                                                        fileNewName   = fileNewName + "." + fileNameFormat + fileExtension;
+                                                                        fullFilePathName = filePath + "/" + fileNewName;
+
+
+                                                                        ////start check file extension
+                                                                        for(inc = 0; inc &lt; fileExtType.length; inc++) {
+                                                                        if(fileExtension.compareToIgnoreCase(fileExtType[inc]) == 0) {
+                                                                        isValidFile = true;
+                                                                        break;
+                                                                        }
+                                                                        }
+                                                                        if(media.isBinary()) {
+                                                                        //used for binary file like :excel,pdf,png..
+                                                                        File fileName = new File(fullFilePathName);
+
+
+                                                                        Files.copy(fileName, media.getStreamData());
+
+                                                                        }
+                                                                        else {
+                                                                        //used for text file only.txt
+                                                                        BufferedWriter bw = null;
+                                                                        FileWriter fw = null;
+
+                                                                        fw = new FileWriter(fullFilePathName);
+                                                                        bw = new BufferedWriter(fw);
+
+                                                                        Messagebox.show("conten="+ media.getStringData());
+
+                                                                        bw.write(media.getStringData());
+                                                                        bw.flush();
+                                                                        }
+                                                                        /*
+                                                                        BufferedWriter bw = null;
+                                                                        FileWriter fw = null;
+
+                                                                        fw = new FileWriter(fullFilePathName);
+                                                                        bw = new BufferedWriter(fw);
+
+                                                                        Messagebox.show("conten="+ media.getStringData());
+
+                                                                        bw.write(media.getStringData());
+                                                                        bw.flush();
+
+                                                                        */
+
+
+                                                                        txtFileUpload.setText(fileNewName);
+                                                                        }
+                                                                        catch(Exception ex) {
+                                                                        Messagebox.show("Error in upload file : " + ex.getMessage());
+                                                                        }
+                                                                    </attribute>
+                                                                </button>
+                                                                <button id="btnRead"  width="70px"   sclass="btn-populate" label="Read"></button>
+                                                            </hbox>
+
+                                                        </div>
+                                                    </hbox>
+                                                    <div height="10px" />
+                                                    <hbox>
+                                                        <vbox width="120px" align="end"><label value="Record Number"  sclass="ReqF"   /></vbox>
+                                                        <textbox id="txtRecBefore" constraint="${ctt}" width="200px"  readonly="true" />
+                                                    </hbox>
+                                                    <div height="10px" />
+                                                    <hbox>
+                                                        <vbox width="120px" align="end"><label value="Record Number After"  sclass="ReqF"    /></vbox>
+                                                        <textbox id="txtRecAfter" constraint="${ctt}" width="200px" readonly="true"    />
+                                                    </hbox>
+                                                    <div height="10px" />
+                                                    <!--
+                                        <hbox>
+                                    <div>
+                                                <grid id="grUploadCustInfo" mold="paging" pageSize="5" height="350px"  sizedByContent="true" span="true" sclass="sDetailView">
+                                                    <columns sizable="true">
+                                                        <column label="Customer ID" align="center"  width="150px" />
+                                                        <column label="Customer Name"   width="150px" align="center"  />
+                                                        <column label="Gender"   width="150px" align="center"  />
+                                                        <column label="Phone"  width="150px" align="center"  />
+
+
+
+
+
+                                                    </columns>
+                                                </grid>
+                                            </div>
+
+                                </hbox>
+
+                                        -->
+                                                </tabpanel>
+                                            </tabpanels>
+                                        </tabbox>
+                                    </hbox>
+                                    <div height="10px" />
+                                </vbox>
+                            </hbox>
+                            <hbox>
+                            </hbox>
+                        </div>
+                    </hbox>
+                </north>
+                <center border="none">
+                    <div zclass="bottomButton">
+                        <button id="btnClose" mold="trendy"  label="Close" />
+                    </div>
+                </center>
+            </borderlayout>
+        </div>
+        <div height="10px" />
+    </window>
+</zk>

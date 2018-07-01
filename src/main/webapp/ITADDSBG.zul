@@ -1,0 +1,111 @@
+<?page title="Generate Biller" contentType="text/html;charset=UTF-8"?>
+<?link rel="stylesheet" type="text/css" href="static/resources/css/style.css"?>
+<zk>
+    <window id="winITADDSBG"
+            border="none"
+            contentStyle="overflow:auto"
+            closable="false"
+            sizable="false"
+            hflex="1"
+            vflex="1"
+            mode = "embedded"
+            apply="com.camsoft.smartpos.view.BillerGenerateView">
+        <!--<zscript src="script/validateText.zs"/>-->
+        <div zclass="subPageTitle"> Generate Biller </div>
+        <toolbar id="tbAction" sclass="toolbarAccess">
+            <toolbarbutton id="tbbNew"     image="static/resources/image/icon/new.gif" 		 label="New" 	   visible="true" disabled="true" />
+            <toolbarbutton id="tbbUnlock"  image="static/resources/image/icon/unlock.gif" 	 label="Unlock"    visible="true" disabled="true" />
+            <toolbarbutton id="tbbSave"    image="static/resources/image/icon/save.gif" 	 label="Save" 	   visible="true" disabled="true" />
+            <toolbarbutton id="tbbDelete"  image="static/resources/image/icon/delete.gif"    label="Clear"    visible="true" disabled="true" />
+            <toolbarbutton id="tbbConfirm" image="static/resources/image/icon/confirm.gif"   label="Confirm"   visible="true" disabled="true" />
+            <toolbarbutton id="tbbAuth"    image="static/resources/image/icon/authorize.gif" label="Approve" visible="true" disabled="true" />
+            <toolbarbutton id="tbbView"    image="static/resources/image/icon/query.gif"     label="Search"    visible="true" disabled="true" />
+        </toolbar>
+        <!-- end window theme -->
+        <div zclass="dvWinBox" height="300px">
+            <borderlayout height="100%">
+                <north size="100%" height="200px" border="none"  >
+                    <hbox>
+                        <div>
+                            <hbox spacing="0">
+                                <textbox id="txtCateItemId" value="${arg.P_CATE_ITEM_ID}" maxlength="20" constraint="${ctt}" readonly="true" visible="false" />
+                                <textbox id="txtToolbarHide" constraint="${ctt}" readonly="true" visible="false" width="100px" />
+                            </hbox>
+                            <div height="5px" />
+                            <hbox spacing="30px">
+                                <vbox>
+                                    <hbox>
+                                        <vbox width="100px" align="end"><label value="Agent Name "  sclass="reqF"    /></vbox>
+                                        <combobox id="cboAgentType"  constraint="${ctt}" readonly="true" width="200px"  >
+
+                                            <!--  <comboitem value="1" label="WESTERN Internaltional School" />
+                                            <comboitem value="2" label="ASIA CASH EXPRESS CO LTD" />
+                                            <comboitem value="3" label="eMoney" />
+                                            <comboitem value="3" label="True Money Co Ltd." />
+                                            <comboitem value="3" label="SPEED PAY PLC" />
+                                            -->
+                                        </combobox>
+                                    </hbox>
+                                    <div height="5px" />
+                                    <hbox>
+                                        <vbox width="100px" align="end"><label value="Currentcy Type"  sclass="reqF"    /></vbox>
+
+                                        <combobox id="cbocurType"  constraint="${ctt}" onCreate="self.setSelectedIndex(0)" readonly="true" width="120px"  >
+                                            <comboitem value="ALL" label="ALL" />
+                                            <comboitem value="KHR" label="KHR" />
+                                            <comboitem value="USD" label="USD" />
+
+                                        </combobox>
+                                    </hbox>
+                                    <div height="5px" />
+                                    <hbox>
+                                        <vbox width="100px" align="end"><label value="From Date"  sclass="reqF"   /></vbox>
+                                        <datebox id="dtbFromDate" format="dd-MMM-yyyy" constraint="no future: Please Choose date"  readonly="true" />
+                                    </hbox>
+                                    <div height="5px" />
+                                    <hbox>
+                                        <vbox width="100px" align="end"><label value="To Date"  sclass="reqF"   /></vbox>
+                                        <datebox id="dtbToDate" format="dd-MMM-yyyy" constraint="no future: Please Choose date"  readonly="true" />
+                                    </hbox>
+                                    <div height="5px" />
+                                    <hbox>
+                                        <vbox width="200px" align="end" ><button id="btnGenerate"   label="Generate " />	</vbox>
+                                    </hbox>
+                                    <!--
+                                      <hbox>
+                                          <div>
+                                                      <grid id="grUploadCustInfo" mold="paging" pageSize="5" height="350px"  sizedByContent="true" span="true" sclass="sDetailView">
+                                                          <columns sizable="true">
+                                                              <column label="Customer ID" align="center"  width="150px" />
+                                                              <column label="Customer Name"   width="150px" align="center"  />
+                                                              <column label="Gender"   width="150px" align="center"  />
+                                                              <column label="Phone"  width="150px" align="center"  />
+
+
+
+
+
+                                                          </columns>
+                                                      </grid>
+                                                  </div>
+
+                                      </hbox>
+
+                                      -->
+                                </vbox>
+                            </hbox>
+                            <hbox>
+                            </hbox>
+                        </div>
+                    </hbox>
+                </north>
+                <center border="none">
+                    <div zclass="bottomButton">
+                        <button id="btnClose" mold="trendy"  label="Close" />
+                    </div>
+                </center>
+            </borderlayout>
+        </div>
+        <div height="10px" />
+    </window>
+</zk>
